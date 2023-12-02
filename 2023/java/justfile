@@ -1,0 +1,12 @@
+default:
+    just -l
+
+build:
+    javac *.java
+
+run +VER:
+    just build
+    java {{VER}}
+
+clean:
+    rm -rf *.class

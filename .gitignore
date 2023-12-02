@@ -1,0 +1,11 @@
+.idea/
+.fleet/
+.vscode/
+
+target/
+build/
+out/
+
+*.class
+
+.DS_Store
