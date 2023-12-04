@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
@@ -11,8 +10,8 @@ public class d03p1 {
     public static void main(String[] args) throws IOException {
         System.out.println("Day 3 - Part 1");
 
-        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day03.txt")));
-        int[][] lines = reader.lines().map(line -> line.chars().toArray()).toArray(size -> new int[size][]);
+        BufferedReader reader = new BufferedReader(new FileReader("../_input/day03.txt"));
+        int[][] lines = reader.lines().map(line -> line.chars().toArray()).toArray(int[][]::new);
 
         int total = process(lines);
         System.out.println("Total: " + total);
@@ -28,23 +27,23 @@ public class d03p1 {
 
                 if(c >= ZERO && c <= NINE) {
                     HashSet<SymbolID> syms = new HashSet<>();
-                    String num = "";
+                    StringBuilder num = new StringBuilder();
 
                     while(col < line.length && c >= ZERO && c <= NINE) {
-                        for(int rr = row - 1 < 0 ? 0 : row - 1; rr < row + 2 && rr < lines.length; rr++) {
-                            for(int cc = col - 1 < 0 ? 0 : col - 1; cc < col + 2 && cc < line.length; cc++) {
+                        for(int rr = Math.max(row - 1, 0); rr < row + 2 && rr < lines.length; rr++) {
+                            for(int cc = Math.max(col - 1, 0); cc < col + 2 && cc < line.length; cc++) {
                                 int sc = lines[rr][cc];
                                 if(!(sc >= ZERO && sc <= NINE) && sc != '.')
                                     syms.add(new SymbolID(rr, cc));
                             }
                         }
                         
-                        num += (char) c;
+                        num.append((char) c);
                         col++;
                         c = line[col < line.length ? col : 0];
                     }
 
-                    int number = stringToInt(num);
+                    int number = stringToInt(num.toString());
                     if(!syms.isEmpty()) total += number;
                 }
             }
@@ -57,7 +56,7 @@ public class d03p1 {
         int acc = 0;
         for(int i = 0; i < str.length(); i++) {
             int c = str.charAt(i);
-            acc += Math.pow(10.0, str.length() - i - 1) * (c - ZERO);
+            acc += (int) (Math.pow(10.0, str.length() - i - 1) * (c - ZERO));
         }
         return acc;
     }

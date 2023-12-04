@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,7 +14,7 @@ public class d02p1 {
     public static void main(String[] args) throws IOException {
         System.out.println("Day 2 - Part 1");
 
-        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day02.txt")));
+        BufferedReader reader = new BufferedReader(new FileReader("../_input/day02.txt"));
         
         int total = 0;
 
@@ -42,14 +41,14 @@ public class d02p1 {
         int id = stringToInt(rawId);
 
         String rawSubSets = str.substring(colon + 2);
-        Stream<String> ss = Arrays.stream(rawSubSets.split(";")).map(i -> i.trim());
-        SubSet[] sets = ss.map(i -> getSubSet(i)).toArray(size -> new SubSet[size]);
+        Stream<String> ss = Arrays.stream(rawSubSets.split(";")).map(String::trim);
+        SubSet[] sets = ss.map(d02p1::getSubSet).toArray(SubSet[]::new);
 
         return new Game(id, sets);
     }
 
     private static SubSet getSubSet(String str) {
-        String[] sets = Arrays.stream(str.split(",")).map(i -> i.trim()).toArray(size -> new String[size]);
+        String[] sets = Arrays.stream(str.split(",")).map(String::trim).toArray(String[]::new);
 
         int red = 0;
         int green = 0;
@@ -74,7 +73,7 @@ public class d02p1 {
         int acc = 0;
         for(int i = 0; i < str.length(); i++) {
             int c = str.charAt(i);
-            acc += Math.pow(10.0, str.length() - i - 1) * (c - ZERO);
+            acc += (int) (Math.pow(10.0, str.length() - i - 1) * (c - ZERO));
         }
         return acc;
     }

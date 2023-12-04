@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -10,7 +9,7 @@ public class d01p1 {
     public static void main(String[] args) throws IOException {
         System.out.println("Day 1 - Part 1");
 
-        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day01.txt")));
+        BufferedReader reader = new BufferedReader(new FileReader("../_input/day01.txt"));
         
         int total = 0;
 

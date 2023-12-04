@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class d04p2 {
     public static void main(String[] args) throws IOException {
         System.out.println("Day 4 - Part 2");
 
-        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day04.txt")));
+        BufferedReader reader = new BufferedReader(new FileReader("../_input/day04.txt"));
 
         int total = process(reader);
         System.out.println("Total: " + total);
@@ -65,7 +64,7 @@ public class d04p2 {
         int acc = 0;
         for(int i = 0; i < str.length(); i++) {
             int c = str.charAt(i);
-            acc += Math.pow(10.0, str.length() - i - 1) * (c - ZERO);
+            acc += (int) (Math.pow(10.0, str.length() - i - 1) * (c - ZERO));
         }
         return acc;
     }
