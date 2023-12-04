@@ -6,6 +6,10 @@ My [Advent of Code](https://adventofcode.com/) solutions.
 
 My focus is on rust and java this year.
 
+###### Input
+
+Put input into ```day#.txt``` under ```2023/_input```.
+
 ### Rust
 
 Requires [rust](https://www.rust-lang.org/tools/install).
