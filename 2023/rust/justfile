@@ -1,0 +1,14 @@
+default:
+    just -l
+
+run +VER:
+    cargo run --bin {{VER}}
+
+fmt:
+    cargo fmt
+
+clippy:
+    cargo clippy --all-targets --locked --workspace -- -D warnings
+
+clean:
+    cargo clean

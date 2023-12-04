@@ -1,0 +1,8 @@
+default:
+    just -l
+
+run +VER:
+    swift {{VER}}.swift
+
+fmt:
+    swift-format format -i *.swift

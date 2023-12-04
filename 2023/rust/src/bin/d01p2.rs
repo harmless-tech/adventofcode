@@ -3,7 +3,7 @@ use std::fs;
 fn main() {
     println!("Day 01 - Part 2");
 
-    let str = fs::read_to_string("../_input/day1.txt").unwrap();
+    let str = fs::read_to_string("../_input/day01.txt").unwrap();
     let lines = str.lines();
 
     let mut total = 0;

@@ -3,14 +3,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class D01P1 {
+public class d01p1 {
     private static final int ZERO = 48;
     private static final int NINE = 57;
 
     public static void main(String[] args) throws IOException {
         System.out.println("Day 1 - Part 1");
 
-        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day1.txt")));
+        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day01.txt")));
         
         int total = 0;
 

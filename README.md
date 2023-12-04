@@ -8,15 +8,16 @@ My focus is on rust and java this year.
 
 ###### Input
 
-Put input into ```day#.txt``` under ```2023/_input```.
+Put input into ```day##.txt``` under ```2023/_input```.
 
 ### Rust
 
-Requires [rust](https://www.rust-lang.org/tools/install).
+Requires [rust](https://www.rust-lang.org/tools/install)
+and [just](https://github.com/casey/just).
 
 ```bash
 cd ./2023/rust
-cargo run --bin d##p#
+just run d##p#
 ```
 
 ### Java
@@ -26,16 +27,17 @@ and [just](https://github.com/casey/just).
 
 ```bash
 cd ./2023/java
-just run D##P#
+just run d##p#
 ```
 
 ### Swift
 
-Requires [swift](https://www.swift.org/install/).
+Requires [swift](https://www.swift.org/install/)
+and [just](https://github.com/casey/just).
 
 ```bash
 cd ./2023/swift
-swift d##p#.swift
+just run d##p#
 ```
 
 ### Zig

@@ -3,7 +3,7 @@ use std::fs;
 fn main() {
     println!("Day 3 - Part 2");
 
-    let str = fs::read_to_string("../_input/day3.txt").unwrap();
+    let str = fs::read_to_string("../_input/day03.txt").unwrap();
     let lines: Vec<&str> = str.lines().collect();
 
     let total = process(lines);

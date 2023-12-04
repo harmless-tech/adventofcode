@@ -3,7 +3,7 @@ use std::fs;
 fn main() {
     println!("Day 4 - Part 2");
 
-    let str = fs::read_to_string("../_input/day4.txt").unwrap();
+    let str = fs::read_to_string("../_input/day04.txt").unwrap();
 
     let total = process(&str);
     println!("Total: {}", total);

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class D04P1 {
+public class d04p1 {
     private static final int ZERO = 48;
 
     public static void main(String[] args) throws IOException {
         System.out.println("Day 4 - Part 1");
 
-        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day4.txt")));
+        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day04.txt")));
         
         int total = 0;
 

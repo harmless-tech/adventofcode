@@ -1,12 +1,12 @@
 default:
     just -l
 
-build:
-    javac *.java
+build +VER:
+    javac {{VER}}.java -d build
 
 run +VER:
-    just build
-    java {{VER}}
+    just build {{VER}}
+    java -cp build {{VER}}
 
 clean:
-    rm -rf *.class
+    rm -rf *.class build

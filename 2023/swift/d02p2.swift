@@ -14,7 +14,7 @@ func main() {
     print("Day 2 - Part 2")
 
     let raw_data = try! NSString(
-        contentsOfFile: "../_input/day2.txt", encoding: String.Encoding.utf8.rawValue)
+        contentsOfFile: "../_input/day02.txt", encoding: String.Encoding.utf8.rawValue)
     let data = raw_data as String
 
     var total = 0

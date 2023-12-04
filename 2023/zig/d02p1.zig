@@ -13,7 +13,7 @@ const SubSet = struct { red: u32, green: u32, blue: u32 };
 pub fn main() anyerror!void {
     std.debug.print("Day 2 - Part 1\n", .{});
 
-    const file = try std.fs.cwd().openFile("../_input/day2.txt", .{});
+    const file = try std.fs.cwd().openFile("../_input/day02.txt", .{});
     defer file.close();
 
     var buf_reader = std.io.bufferedReader(file.reader());

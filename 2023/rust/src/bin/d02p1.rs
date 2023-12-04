@@ -18,7 +18,7 @@ struct SubSet {
 fn main() {
     println!("Day 2 - Part 1");
 
-    let str = fs::read_to_string("../_input/day2.txt").unwrap();
+    let str = fs::read_to_string("../_input/day02.txt").unwrap();
     let lines = str.lines();
 
     let mut total = 0;

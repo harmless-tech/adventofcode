@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class D03P2 {
+public class d03p2 {
     private static final int ZERO = 48;
     private static final int NINE = 57;
 
     public static void main(String[] args) throws IOException {
         System.out.println("Day 3 - Part 2");
 
-        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day3.txt")));
+        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day03.txt")));
         int[][] lines = reader.lines().map(line -> line.chars().toArray()).toArray(size -> new int[size][]);
 
         int total = process(lines);

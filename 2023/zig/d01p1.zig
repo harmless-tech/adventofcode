@@ -6,7 +6,7 @@ const NINE: u8 = 57;
 pub fn main() anyerror!void {
     std.debug.print("Day 1 - Part 1\n", .{});
 
-    const file = try std.fs.cwd().openFile("../_input/day1.txt", .{});
+    const file = try std.fs.cwd().openFile("../_input/day01.txt", .{});
     defer file.close();
 
     var buf_reader = std.io.bufferedReader(file.reader());

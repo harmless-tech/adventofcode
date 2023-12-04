@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-public class D02P2 {
+public class d02p2 {
     private static final int ZERO = 48;
 
     public static void main(String[] args) throws IOException {
         System.out.println("Day 2 - Part 2");
 
-        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day2.txt")));
+        BufferedReader reader = new BufferedReader(new FileReader(new File("../_input/day02.txt")));
         
         int total = 0;
 

@@ -2,11 +2,12 @@ default:
     just -l
 
 build +VER:
-    zig build-exe ./{{VER}}.zig --name {{VER}}.x
+    mkdir -p build
+    cd build && zig build-exe ../{{VER}}.zig --name {{VER}}.x
 
 run +VER:
     just build {{VER}}
-    ./{{VER}}.x
+    ./build/{{VER}}.x
 
 clean:
-    rm -rf *.o *.x
+    rm -rf *.o *.x build
