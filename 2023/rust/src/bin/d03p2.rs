@@ -13,7 +13,7 @@ fn main() {
 fn process(lines: Vec<&str>) -> u32 {
     let mut l = Vec::new();
     for line in lines {
-        l.push(line.chars().into_iter().collect::<Vec<char>>());
+        l.push(line.chars().collect::<Vec<char>>());
     }
     let lines = l;
 
