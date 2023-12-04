@@ -2,10 +2,19 @@
 .fleet/
 .vscode/
 
+*.iml
+
 target/
 build/
 out/
 
 *.class
+*.o
+
+2023/zig/d*p*
+!2023/zig/*.zig
+
+_archive/
+_input/
 
 .DS_Store
