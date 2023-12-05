@@ -26,18 +26,17 @@ fn get(str: []u8) u32 {
     var first: ?u32 = null;
     var last: ?u32 = null;
 
-    for(str) |c| {
-        if(c >= ZERO and c <= NINE) {
-            if(first == null) {
+    for (str) |c| {
+        if (c >= ZERO and c <= NINE) {
+            if (first == null) {
                 first = c - ZERO;
-            }
-            else {
+            } else {
                 last = c - ZERO;
             }
         }
     }
 
-    if(last == null) {
+    if (last == null) {
         last = first;
     }
 

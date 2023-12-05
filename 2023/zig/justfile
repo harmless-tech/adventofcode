@@ -9,5 +9,8 @@ run +VER:
     just build {{VER}}
     ./build/{{VER}}.x
 
+fmt:
+    zig fmt *.zig
+
 clean:
     rm -rf *.o *.x build

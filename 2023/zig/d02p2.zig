@@ -33,12 +33,12 @@ fn process(str: []const u8) u32 {
     var max_blue: u32 = 0;
 
     const ss = unwrap([]SubSet, game.subsets.toOwnedSlice());
-    for(ss) |sub| {
+    for (ss) |sub| {
         max_red = @max(max_red, sub.red);
         max_green = @max(max_green, sub.green);
         max_blue = @max(max_blue, sub.blue);
     }
-    
+
     return max_red * max_green * max_blue;
 }
 
@@ -48,12 +48,12 @@ fn get_game(str: []const u8) Game {
 
     var ss = std.mem.splitAny(u8, raw_subsets, ";");
     var subsets = std.ArrayList(SubSet).init(allocator);
-    while(ss.next()) |s| {
+    while (ss.next()) |s| {
         const set = get_subset(s);
         unwrap(void, subsets.append(set));
     }
 
-    return Game { .subsets = subsets };
+    return Game{ .subsets = subsets };
 }
 
 fn get_subset(str: []const u8) SubSet {
@@ -63,37 +63,34 @@ fn get_subset(str: []const u8) SubSet {
     var green: u32 = 0;
     var blue: u32 = 0;
 
-    while(subs.next()) |sset| {
+    while (subs.next()) |sset| {
         const s = std.mem.trim(u8, sset, " \t\n");
-        if(std.mem.endsWith(u8, s, "red")) {
+        if (std.mem.endsWith(u8, s, "red")) {
             red += str_to_u32(s[0..(s.len - 4)]);
-        }
-        else if(std.mem.endsWith(u8, s, "green")) {
+        } else if (std.mem.endsWith(u8, s, "green")) {
             green += str_to_u32(s[0..(s.len - 6)]);
-        }
-        else if(std.mem.endsWith(u8, s, "blue")) {
+        } else if (std.mem.endsWith(u8, s, "blue")) {
             blue += str_to_u32(s[0..(s.len - 5)]);
-        }
-        else {
+        } else {
             std.debug.panic("Unknown color", .{});
         }
     }
 
-    return SubSet { .red = red, .green = green, .blue = blue };
+    return SubSet{ .red = red, .green = green, .blue = blue };
 }
 
 fn str_to_u32(str: []const u8) u32 {
     var acc: u32 = 0;
-    for(str, 0..) |c, i| {
+    for (str, 0..) |c, i| {
         acc += (unwrap(u32, std.math.powi(u32, 10, @as(u32, @intCast(str.len - i - 1))))) * (c - ZERO);
     }
     return acc;
 }
 
 fn unwrap(comptime T: type, val: anyerror!T) T {
-    if(val) |value|{
+    if (val) |value| {
         return value;
-    } else |err|{
-        std.debug.panic("Panicked at Error: {any}",.{err});
+    } else |err| {
+        std.debug.panic("Panicked at Error: {any}", .{err});
     }
 }
