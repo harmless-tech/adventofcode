@@ -7,7 +7,7 @@ run +VER:
 fmt:
     cargo fmt
 
-clippy:
+lint:
     cargo clippy --all-targets --locked --workspace -- -D warnings
 
 clean:
