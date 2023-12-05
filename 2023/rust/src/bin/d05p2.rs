@@ -2,7 +2,7 @@ use std::fs;
 
 #[derive(Debug)]
 enum Maps {
-    Seeds(Vec<i64>),
+    Seeds(Vec<(i64, i64)>),
     SeedsToSoil(Vec<Mappings>),
     SoilToFertilizer(Vec<Mappings>),
     FertilizerToWater(Vec<Mappings>),
@@ -86,22 +86,51 @@ fn process(string: &str) -> i64 {
         _ => panic!("Not at 0!"),
     }
 
-    vals.iter().fold(i64::MAX, |acc, x| acc.min(*x))
+    vals.iter().fold(i64::MAX, |acc, x| acc.min(x.0))
 }
 
-fn map_vals(vals: &mut Vec<i64>, mappings: Vec<Mappings>) {
+fn map_vals(vals: &mut Vec<(i64, i64)>, mappings: Vec<Mappings>) {
     let mut changes = vec![false; vals.len()];
     for m in mappings {
         let dest_start = m.dest_start;
+        let dest_end = dest_start + m.range_len - 1;
         let src_start = m.src_start;
         let src_end = src_start + m.range_len - 1;
         let diff = dest_start - src_start;
 
-        for (i, v) in vals.iter_mut().enumerate() {
-            if *v >= src_start && *v <= src_end && !changes[i] {
-                *v += diff;
-                changes[i] = true;
+        let mut i = 0;
+        while i < vals.len() {
+            if !changes[i] {
+                let v1 = vals[i].0;
+                let v2 = vals[i].1;
+
+                if v1 >= src_start && v2 <= src_end {
+                    // If the range is completly within, then just shift it.
+                    vals[i].0 += diff;
+                    vals[i].1 += diff;
+                    changes[i] = true;
+                } else if v1 >= src_start && v1 <= src_end && v2 > src_end {
+                    // If the upper range is out of bounds
+                    vals[i].0 += diff;
+                    vals[i].1 = dest_end;
+
+                    vals.push((src_end + 1, v2));
+
+                    changes[i] = true;
+                    changes.push(false);
+                } else if v1 < src_start && v2 >= src_start && v2 <= src_end {
+                    // If the lower range is out of bounds
+                    vals[i].0 = dest_start;
+                    vals[i].1 += diff;
+
+                    vals.push((v1, src_start - 1));
+
+                    changes[i] = true;
+                    changes.push(false);
+                }
             }
+
+            i += 1;
         }
     }
 }
@@ -109,20 +138,14 @@ fn map_vals(vals: &mut Vec<i64>, mappings: Vec<Mappings>) {
 fn convert_items(lines: &[&str]) -> Maps {
     let first = lines.first().unwrap();
     if first.starts_with("seeds:") {
-        // TODO: Optimize to work on ranges instead of raw values. (Or multithread?)
         let mut seeds = first.split(' ').collect::<Vec<&str>>();
         seeds.remove(0);
         let seeds: Vec<i64> = seeds.iter().map(|i| str_to_i64(i)).collect();
-        let seeds: Vec<&[i64]> = seeds.chunks_exact(2).collect();
-
-        let mut all = Vec::new();
-        for s in seeds {
-            for i in s[0]..(s[0] + s[1]) {
-                all.push(i);
-            } 
-        }
-
-        Maps::Seeds(all)
+        let seeds: Vec<(i64, i64)> = seeds
+            .chunks_exact(2)
+            .map(|i| (i[0], i[0] + i[1] - 1))
+            .collect();
+        Maps::Seeds(seeds)
     } else if first.starts_with("seed-to-soil map:") {
         Maps::SeedsToSoil(make_mappings(&lines[1..lines.len()]))
     } else if first.starts_with("soil-to-fertilizer map:") {
