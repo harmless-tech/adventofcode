@@ -11,13 +11,14 @@ public class d04p1 {
         System.out.println("Day 4 - Part 1");
 
         BufferedReader reader = new BufferedReader(new FileReader("../_input/day04.txt"));
-        
+
         int total = 0;
 
         String line;
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             total += process(line.trim());
         }
+        reader.close();
 
         System.out.println("Total: " + total);
     }
@@ -28,30 +29,30 @@ public class d04p1 {
         int[] have_nums = get_nums(nums[1]);
 
         Integer count = null;
-        for(var i : have_nums) {
-            if(Arrays.stream(winning_nums).anyMatch(w -> w == i)) {
-                if(count == null) count = 1;
+        for (var i : have_nums) {
+            if (Arrays.stream(winning_nums).anyMatch(w -> w == i)) {
+                if (count == null) count = 1;
                 else count *= 2;
             }
         }
 
-        if(count == null) return 0;
+        if (count == null) return 0;
         return count;
     }
 
     private static int[] get_nums(String str) {
         String[] raws = str.split(" ");
         ArrayList<Integer> builder = new ArrayList<>();
-        for(var r : raws) {
+        for (var r : raws) {
             r = r.trim();
-            if(!r.isEmpty()) builder.add(stringToInt(r));
+            if (!r.isEmpty()) builder.add(stringToInt(r));
         }
         return builder.stream().mapToInt(i -> i).toArray();
     }
 
     private static int stringToInt(String str) {
         int acc = 0;
-        for(int i = 0; i < str.length(); i++) {
+        for (int i = 0; i < str.length(); i++) {
             int c = str.charAt(i);
             acc += (int) (Math.pow(10.0, str.length() - i - 1) * (c - ZERO));
         }

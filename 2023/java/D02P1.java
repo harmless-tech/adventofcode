@@ -15,22 +15,22 @@ public class d02p1 {
         System.out.println("Day 2 - Part 1");
 
         BufferedReader reader = new BufferedReader(new FileReader("../_input/day02.txt"));
-        
+
         int total = 0;
 
         String line;
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             total += process(line.trim());
         }
+        reader.close();
 
         System.out.println("Total: " + total);
     }
 
     private static int process(String str) {
         Game game = getGame(str);
-        for(var s : game.subsets) {
-            if(s.red > MAX_RED || s.green > MAX_GREEN || s.blue > MAX_BLUE)
-                return 0;
+        for (var s : game.subsets) {
+            if (s.red > MAX_RED || s.green > MAX_GREEN || s.blue > MAX_BLUE) return 0;
         }
         return game.id;
     }
@@ -54,13 +54,10 @@ public class d02p1 {
         int green = 0;
         int blue = 0;
 
-        for(var s : sets) {
-            if(s.endsWith("red"))
-                red += stringToInt(s.substring(0, s.length() - 4));
-            else if(s.endsWith("green"))
-                green += stringToInt(s.substring(0, s.length() - 6));
-            else if(s.endsWith("blue"))
-                blue += stringToInt(s.substring(0, s.length() - 5));  
+        for (var s : sets) {
+            if (s.endsWith("red")) red += stringToInt(s.substring(0, s.length() - 4));
+            else if (s.endsWith("green")) green += stringToInt(s.substring(0, s.length() - 6));
+            else if (s.endsWith("blue")) blue += stringToInt(s.substring(0, s.length() - 5));
             else {
                 throw new RuntimeException("Unknown color");
             }
@@ -71,7 +68,7 @@ public class d02p1 {
 
     private static int stringToInt(String str) {
         int acc = 0;
-        for(int i = 0; i < str.length(); i++) {
+        for (int i = 0; i < str.length(); i++) {
             int c = str.charAt(i);
             acc += (int) (Math.pow(10.0, str.length() - i - 1) * (c - ZERO));
         }
@@ -79,5 +76,6 @@ public class d02p1 {
     }
 
     private record Game(int id, SubSet[] subsets) {}
+
     private record SubSet(int red, int green, int blue) {}
 }

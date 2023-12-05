@@ -11,13 +11,14 @@ public class d02p2 {
         System.out.println("Day 2 - Part 2");
 
         BufferedReader reader = new BufferedReader(new FileReader("../_input/day02.txt"));
-        
+
         int total = 0;
 
         String line;
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             total += process(line.trim());
         }
+        reader.close();
 
         System.out.println("Total: " + total);
     }
@@ -29,7 +30,7 @@ public class d02p2 {
         int maxGreen = 0;
         int maxBlue = 0;
 
-        for(var s : game.subsets) {
+        for (var s : game.subsets) {
             maxRed = Math.max(maxRed, s.red);
             maxGreen = Math.max(maxGreen, s.green);
             maxBlue = Math.max(maxBlue, s.blue);
@@ -54,13 +55,10 @@ public class d02p2 {
         int green = 0;
         int blue = 0;
 
-        for(var s : sets) {
-            if(s.endsWith("red"))
-                red += stringToInt(s.substring(0, s.length() - 4));
-            else if(s.endsWith("green"))
-                green += stringToInt(s.substring(0, s.length() - 6));
-            else if(s.endsWith("blue"))
-                blue += stringToInt(s.substring(0, s.length() - 5));  
+        for (var s : sets) {
+            if (s.endsWith("red")) red += stringToInt(s.substring(0, s.length() - 4));
+            else if (s.endsWith("green")) green += stringToInt(s.substring(0, s.length() - 6));
+            else if (s.endsWith("blue")) blue += stringToInt(s.substring(0, s.length() - 5));
             else {
                 throw new RuntimeException("Unknown color");
             }
@@ -71,7 +69,7 @@ public class d02p2 {
 
     private static int stringToInt(String str) {
         int acc = 0;
-        for(int i = 0; i < str.length(); i++) {
+        for (int i = 0; i < str.length(); i++) {
             int c = str.charAt(i);
             acc += (int) (Math.pow(10.0, str.length() - i - 1) * (c - ZERO));
         }
@@ -79,5 +77,6 @@ public class d02p2 {
     }
 
     private record Game(SubSet[] subsets) {}
+
     private record SubSet(int red, int green, int blue) {}
 }

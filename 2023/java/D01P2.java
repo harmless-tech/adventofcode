@@ -10,44 +10,37 @@ public class d01p2 {
         System.out.println("Day 1 - Part 2");
 
         BufferedReader reader = new BufferedReader(new FileReader("../_input/day01.txt"));
-        
+
         int total = 0;
 
         String line;
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             total += get(line.trim());
         }
+        reader.close();
 
         System.out.println("Total: " + total);
     }
 
     private static int get(String str) {
-        for(int i = 0; i < str.length(); i++) {
-            if(str.startsWith("one", i)) {
+        for (int i = 0; i < str.length(); i++) {
+            if (str.startsWith("one", i)) {
                 str = str.substring(0, i) + "1" + str.substring(i + 2);
-            }
-            else if(str.startsWith("two", i)) {
+            } else if (str.startsWith("two", i)) {
                 str = str.substring(0, i) + "2" + str.substring(i + 2);
-            }
-            else if(str.startsWith("three", i)) {
+            } else if (str.startsWith("three", i)) {
                 str = str.substring(0, i) + "3" + str.substring(i + 4);
-            }
-            else if(str.startsWith("four", i)) {
+            } else if (str.startsWith("four", i)) {
                 str = str.substring(0, i) + "4" + str.substring(i + 3);
-            }
-            else if(str.startsWith("five", i)) {
+            } else if (str.startsWith("five", i)) {
                 str = str.substring(0, i) + "5" + str.substring(i + 3);
-            }
-            else if(str.startsWith("six", i)) {
+            } else if (str.startsWith("six", i)) {
                 str = str.substring(0, i) + "6" + str.substring(i + 2);
-            }
-            else if(str.startsWith("seven", i)) {
+            } else if (str.startsWith("seven", i)) {
                 str = str.substring(0, i) + "7" + str.substring(i + 4);
-            }
-            else if(str.startsWith("eight", i)) {
+            } else if (str.startsWith("eight", i)) {
                 str = str.substring(0, i) + "8" + str.substring(i + 4);
-            }
-            else if(str.startsWith("nine", i)) {
+            } else if (str.startsWith("nine", i)) {
                 str = str.substring(0, i) + "9" + str.substring(i + 3);
             }
         }
@@ -55,16 +48,16 @@ public class d01p2 {
         int first = -1;
         int last = -1;
 
-        for(int c : str.chars().toArray()) {
-            if(c >= ZERO && c <= NINE) {
-                if(first == -1) first = c - ZERO;
+        for (int c : str.chars().toArray()) {
+            if (c >= ZERO && c <= NINE) {
+                if (first == -1) first = c - ZERO;
                 else {
                     last = c - ZERO;
                 }
             }
         }
 
-        if(last == -1) last = first;
+        if (last == -1) last = first;
         return (first * 10) + last;
     }
 }

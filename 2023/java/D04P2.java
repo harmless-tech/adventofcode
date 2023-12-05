@@ -13,27 +13,29 @@ public class d04p2 {
         BufferedReader reader = new BufferedReader(new FileReader("../_input/day04.txt"));
 
         int total = process(reader);
+        reader.close();
+
         System.out.println("Total: " + total);
     }
 
     private static int process(BufferedReader reader) throws IOException {
         ArrayList<Integer> cards = new ArrayList<>();
         String line;
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             cards.add(process_card(line.trim()));
         }
         int[] ccs = cards.stream().mapToInt(i -> i).toArray();
 
         int count = 0;
-        for(int i = 0; i < ccs.length; i++) count += process_num(i, ccs);
+        for (int i = 0; i < ccs.length; i++) count += process_num(i, ccs);
         return count;
     }
 
     private static int process_num(int card, int[] ccs) {
         int count = 1;
         var c = ccs[card];
-        for(int i = 1; i <= c; i++) {
-            if(card + i < ccs.length) count += process_num(card + i, ccs);
+        for (int i = 1; i <= c; i++) {
+            if (card + i < ccs.length) count += process_num(card + i, ccs);
         }
         return count;
     }
@@ -44,8 +46,8 @@ public class d04p2 {
         int[] have_nums = get_nums(nums[1]);
 
         int count = 0;
-        for(var i : have_nums) {
-            if(Arrays.stream(winning_nums).anyMatch(w -> w == i)) count += 1;
+        for (var i : have_nums) {
+            if (Arrays.stream(winning_nums).anyMatch(w -> w == i)) count += 1;
         }
         return count;
     }
@@ -53,16 +55,16 @@ public class d04p2 {
     private static int[] get_nums(String str) {
         String[] raws = str.split(" ");
         ArrayList<Integer> builder = new ArrayList<>();
-        for(var r : raws) {
+        for (var r : raws) {
             r = r.trim();
-            if(!r.isEmpty()) builder.add(stringToInt(r));
+            if (!r.isEmpty()) builder.add(stringToInt(r));
         }
         return builder.stream().mapToInt(i -> i).toArray();
     }
 
     private static int stringToInt(String str) {
         int acc = 0;
-        for(int i = 0; i < str.length(); i++) {
+        for (int i = 0; i < str.length(); i++) {
             int c = str.charAt(i);
             acc += (int) (Math.pow(10.0, str.length() - i - 1) * (c - ZERO));
         }

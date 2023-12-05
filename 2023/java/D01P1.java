@@ -10,13 +10,14 @@ public class d01p1 {
         System.out.println("Day 1 - Part 1");
 
         BufferedReader reader = new BufferedReader(new FileReader("../_input/day01.txt"));
-        
+
         int total = 0;
 
         String line;
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             total += get(line.trim());
         }
+        reader.close();
 
         System.out.println("Total: " + total);
     }
@@ -25,16 +26,16 @@ public class d01p1 {
         int first = -1;
         int last = -1;
 
-        for(int c : str.chars().toArray()) {
-            if(c >= ZERO && c <= NINE) {
-                if(first == -1) first = c - ZERO;
+        for (int c : str.chars().toArray()) {
+            if (c >= ZERO && c <= NINE) {
+                if (first == -1) first = c - ZERO;
                 else {
                     last = c - ZERO;
                 }
             }
         }
 
-        if(last == -1) last = first;
+        if (last == -1) last = first;
         return (first * 10) + last;
     }
 }
