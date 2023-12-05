@@ -3,13 +3,7 @@ use std::fs;
 #[derive(Debug)]
 enum Maps {
     Seeds(Vec<(i64, i64)>),
-    SeedsToSoil(Vec<Mappings>),
-    SoilToFertilizer(Vec<Mappings>),
-    FertilizerToWater(Vec<Mappings>),
-    WaterToLight(Vec<Mappings>),
-    LightToTemp(Vec<Mappings>),
-    TempToHumidity(Vec<Mappings>),
-    HumidityToLocation(Vec<Mappings>),
+    To(Vec<Mappings>),
 }
 
 #[derive(Debug)]
@@ -57,33 +51,11 @@ fn process(string: &str) -> i64 {
         Maps::Seeds(s) => s,
         _ => panic!("Seeds not at 0!"),
     };
-    match maps.remove(0) {
-        Maps::SeedsToSoil(s) => map_vals(&mut vals, s),
-        _ => panic!("Not at 0!"),
-    }
-    match maps.remove(0) {
-        Maps::SoilToFertilizer(s) => map_vals(&mut vals, s),
-        _ => panic!("Not at 0!"),
-    }
-    match maps.remove(0) {
-        Maps::FertilizerToWater(s) => map_vals(&mut vals, s),
-        _ => panic!("Not at 0!"),
-    }
-    match maps.remove(0) {
-        Maps::WaterToLight(s) => map_vals(&mut vals, s),
-        _ => panic!("Not at 0!"),
-    }
-    match maps.remove(0) {
-        Maps::LightToTemp(s) => map_vals(&mut vals, s),
-        _ => panic!("Not at 0!"),
-    }
-    match maps.remove(0) {
-        Maps::TempToHumidity(s) => map_vals(&mut vals, s),
-        _ => panic!("Not at 0!"),
-    }
-    match maps.remove(0) {
-        Maps::HumidityToLocation(s) => map_vals(&mut vals, s),
-        _ => panic!("Not at 0!"),
+    for m in maps {
+        match m {
+            Maps::To(s) => map_vals(&mut vals, s),
+            _ => panic!("Not at 0!"),
+        }
     }
 
     vals.iter().fold(i64::MAX, |acc, x| acc.min(x.0))
@@ -146,22 +118,8 @@ fn convert_items(lines: &[&str]) -> Maps {
             .map(|i| (i[0], i[0] + i[1] - 1))
             .collect();
         Maps::Seeds(seeds)
-    } else if first.starts_with("seed-to-soil map:") {
-        Maps::SeedsToSoil(make_mappings(&lines[1..lines.len()]))
-    } else if first.starts_with("soil-to-fertilizer map:") {
-        Maps::SoilToFertilizer(make_mappings(&lines[1..lines.len()]))
-    } else if first.starts_with("fertilizer-to-water map:") {
-        Maps::FertilizerToWater(make_mappings(&lines[1..lines.len()]))
-    } else if first.starts_with("water-to-light map:") {
-        Maps::WaterToLight(make_mappings(&lines[1..lines.len()]))
-    } else if first.starts_with("light-to-temperature map:") {
-        Maps::LightToTemp(make_mappings(&lines[1..lines.len()]))
-    } else if first.starts_with("temperature-to-humidity map:") {
-        Maps::TempToHumidity(make_mappings(&lines[1..lines.len()]))
-    } else if first.starts_with("humidity-to-location map:") {
-        Maps::HumidityToLocation(make_mappings(&lines[1..lines.len()]))
     } else {
-        panic!("Unknown mapping")
+        Maps::To(make_mappings(&lines[1..lines.len()]))
     }
 }
 
