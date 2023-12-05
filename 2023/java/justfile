@@ -9,9 +9,12 @@ run +VER:
     java -cp build {{VER}}
 
 fmt:
-    mkdir -p build
-    [ ! -e "./build/google-java-format-1.18.1-all-deps.jar" ] && cd build && wget "https://github.com/google/google-java-format/releases/download/v1.18.1/google-java-format-1.18.1-all-deps.jar" || exit 0
-    java -jar ./build/google-java-format-1.18.1-all-deps.jar -i -a *.java
+    mkdir -p build/jars
+    [ ! -e "./build/jars/google-java-format-1.18.1-all-deps.jar" ] && \
+        cd build/jars && \
+        wget "https://github.com/google/google-java-format/releases/download/v1.18.1/google-java-format-1.18.1-all-deps.jar" \
+        || exit 0
+    java -jar ./build/jars/google-java-format-1.18.1-all-deps.jar -i -a *.java
 
 clean:
-    rm -rf *.class build
+    rm -rf *.class build *.iml
