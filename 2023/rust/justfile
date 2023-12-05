@@ -4,6 +4,9 @@ default:
 run +VER:
     cargo run --bin {{VER}}
 
+runr +VER:
+    cargo run --release --bin {{VER}}
+
 fmt:
     cargo fmt
 
