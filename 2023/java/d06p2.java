@@ -48,12 +48,11 @@ public class d06p2 {
             if (!r.isEmpty()) builder.add(r);
         }
 
-        String app = "";
+        StringBuilder app = new StringBuilder();
         for (var s : builder) {
-            app += s;
+            app.append(s);
         }
-
-        return stringToLong(app);
+        return stringToLong(app.toString());
     }
 
     private static long stringToLong(String str) {

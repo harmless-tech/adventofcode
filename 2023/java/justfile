@@ -17,4 +17,4 @@ fmt:
     java -jar ./build/jars/google-java-format-1.18.1-all-deps.jar -i -a *.java
 
 clean:
-    rm -rf *.class build *.iml
+    rm -rf *.class build *.iml .idea

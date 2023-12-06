@@ -77,7 +77,7 @@ fn map_vals(vals: &mut Vec<(i64, i64)>, mappings: Vec<Mappings>) {
                 let v2 = vals[i].1;
 
                 if v1 >= src_start && v2 <= src_end {
-                    // If the range is completly within, then just shift it.
+                    // If the range is completely within, then shift it.
                     vals[i].0 += diff;
                     vals[i].1 += diff;
                     changes[i] = true;

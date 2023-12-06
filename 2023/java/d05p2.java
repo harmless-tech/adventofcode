@@ -66,7 +66,7 @@ public class d05p2 {
                     var v2 = val.end;
 
                     if (v1 >= srcStart && v2 <= srcEnd) {
-                        // If the range is completly within, then just shift it.
+                        // If the range is completely within, then shift it.
                         var seed = vals.get(i);
                         seed.start += diff;
                         seed.end += diff;
