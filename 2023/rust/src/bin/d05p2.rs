@@ -31,8 +31,8 @@ fn process(string: &str) -> i64 {
 
     // Load items
     let mut maps = Vec::new();
-
     let mut store = Vec::new();
+
     let mut i = 0;
     while i < input.len() {
         let l = input.get(i).unwrap();
