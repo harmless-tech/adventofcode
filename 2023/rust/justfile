@@ -1,6 +1,9 @@
 default:
     just -l
 
+build +VER:
+    cargo build --bin {{VER}}
+
 run +VER:
     cargo run --bin {{VER}}
 
